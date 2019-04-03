@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1554259160 source:c:\users\tomas\desktop\giron_tp1_labo\labo-prog 1\tp1 - fecha --\tp1_labo\tp1.c
+	<stdio.h>
+
+1554259185 source:c:\users\tomas\desktop\giron_tp1_labo\labo-prog 1\tp1 - fecha --\tp1_labo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tp1.h"
+
+1554259014 c:\users\tomas\desktop\giron_tp1_labo\labo-prog 1\tp1 - fecha --\tp1_labo\tp1.h
+
