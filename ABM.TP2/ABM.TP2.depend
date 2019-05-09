@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1557387918 source:c:\users\tomas\desktop\abm_tp2_girón.tomás\abm.tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayEmployees.h"
+	"arraynuevo.h"
+
+1557377464 source:c:\users\tomas\desktop\abm_tp2_girón.tomás\abm.tp2\arraynuevo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraynuevo.h"
+
+1556236361 c:\users\tomas\desktop\abm_tp2_girón.tomás\abm.tp2\arraynuevo.h
+
+1557388615 source:c:\users\tomas\desktop\abm_tp2_girón.tomás\abm.tp2\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraynuevo.h"
+	"ArrayEmployees.h"
+
+1557385845 c:\users\tomas\desktop\abm_tp2_girón.tomás\abm.tp2\arrayemployees.h
+
