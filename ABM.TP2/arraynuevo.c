@@ -4,7 +4,12 @@
 #include "arraynuevo.h"
 
 
-
+/** \brief Obtiene un string
+* \param array de char sin especificar
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \return retorna 0 diciendo que no hay error
+*/
 int getString(char* pStr, char* msg, char*msgE)
 {
     char bufferStr[20];
@@ -22,7 +27,12 @@ int getString(char* pStr, char* msg, char*msgE)
     return 0;
 }
 
-
+/** \brief Obtiene una variable int
+* \param array de int sin especificar
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getInt (int *pNum, char* msg, char* msgE)
 
 {
@@ -40,7 +50,12 @@ int getInt (int *pNum, char* msg, char* msgE)
     }
     return ret;
 }
-
+/** \brief Obtiene una variable float
+* \param array de float sin especificar
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getFloat (float *pNum, char* msg, char* msgE)
 
 {
@@ -58,7 +73,15 @@ int getFloat (float *pNum, char* msg, char* msgE)
     }
     return ret;
 }
-
+/** \brief Obtiene una variable int dentro de cierto rango
+* \param array de int sin especificar
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param min delimita el minimo del rango
+* \param max delimita el maximo del rango
+* \param la cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getIntInRange(  int *pNum,
                     char *msg,
                     char *msgE,
@@ -69,7 +92,7 @@ int getIntInRange(  int *pNum,
     int retorno = -1;
     char bufferStr[20];
     int bufferInt;
-    if( pNum != NULL &&
+    if( pNum != NULL && msg != NULL && msgE != NULL &&
         reintentos >= 0)
     {
         if(!getString(bufferStr,msg,msgE) &&
@@ -85,7 +108,13 @@ int getIntInRange(  int *pNum,
     }
     return retorno;
 }
-
+/** \brief Permite cargar un array con variables int
+* \param array de int
+* \param tamaño del array
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \return retorna 0 diciendo que no hay error
+*/
 int cargarArraySecuencialInt(int* pArray,int len,char* msg, char* msgE)
 
 {
@@ -103,7 +132,13 @@ int cargarArraySecuencialInt(int* pArray,int len,char* msg, char* msgE)
     }
     return 0;
 }
-
+/** \brief Carga secuencial de un array con float
+* \param array de float
+* \param tamaño del array
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \return retorna 0 diciendo que no hay error
+*/
 int cargarArraySecuencialFloat(float* pArray,int len,char* msg, char* msgE)
 
 {
@@ -121,7 +156,13 @@ int cargarArraySecuencialFloat(float* pArray,int len,char* msg, char* msgE)
     }
     return 0;
 }
-
+/** \brief Obtiene un array de letras
+* \param array de string (validado con letras)
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getStringLetras (char* pStr, char* msg, char* msgE,int reintentos)
 {
     char bufferStr[20];
@@ -141,7 +182,13 @@ int getStringLetras (char* pStr, char* msg, char* msgE,int reintentos)
     }
     return ret;
 }
-
+/** \brief Obtiene un array de numeros int
+* \param array de string (validado con int)
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getStringNumerosInt (char* pStr, char* msg, char* msgE,int reintentos)
 {
     char bufferStr[20];
@@ -161,7 +208,13 @@ int getStringNumerosInt (char* pStr, char* msg, char* msgE,int reintentos)
     }
     return ret;
 }
-
+/** \brief Obtiene un array de numeros float
+* \param array de string (validado con float)
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getStringNumerosFloat (char* pStr, char* msg, char* msgE,int reintentos)
 {
     char bufferStr[20];
@@ -181,7 +234,13 @@ int getStringNumerosFloat (char* pStr, char* msg, char* msgE,int reintentos)
     }
     return ret;
 }
-
+/** \brief Obtiene un array de caracteres alfanumericos
+* \param array de string (validado con alfanumerico)
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getStringAlphanumeric (char* pStr, char* msg, char* msgE,int reintentos)
 {
     char bufferStr[20];
@@ -201,7 +260,13 @@ int getStringAlphanumeric (char* pStr, char* msg, char* msgE,int reintentos)
     }
     return ret;
 }
-
+/** \brief Obtiene un array de string
+* \param array de string (validado con telefono)
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getTelephone (char* pStr, char* msg, char* msgE,int reintentos)
 {
     char bufferStr[20];
@@ -221,7 +286,13 @@ int getTelephone (char* pStr, char* msg, char* msgE,int reintentos)
     }
     return ret;
 }
-
+/** \brief Obtiene un array de string
+* \param array de string (validado con dni)
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getDni (char* pStr, char* msg, char* msgE,int reintentos)
 {
     char bufferStr[20];
@@ -241,7 +312,13 @@ int getDni (char* pStr, char* msg, char* msgE,int reintentos)
     }
     return ret;
 }
-
+/** \brief Obtiene un array de string
+* \param array de string (validado con cuit/cuil)
+* \param algun mensaje que se quiera expresar
+* \param msgE mensajes de error de las funciones
+* \param cantidad de reintentos antes de fallar
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int getCuit (char* pStr, char* msg, char* msgE,int reintentos)
 {
     char bufferStr[20];
@@ -261,7 +338,12 @@ int getCuit (char* pStr, char* msg, char* msgE,int reintentos)
     }
     return ret;
 }
-
+/** \brief Busca un espacio libre dentro de los arrays paralelos
+* \param arrays paralelos de char
+* \param variable para guardar la posicion
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int searchFreeSpace(char pArray[][20],int* pIndex,int len)
 {
     int i;
@@ -277,7 +359,13 @@ int searchFreeSpace(char pArray[][20],int* pIndex,int len)
     }
     return ret;
 }
-
+/** \brief Busca un nombre dentro de los arrays paralelos
+* \param array de nombre
+* \param arrays paralelos de char
+* \param tamaño del array
+* \param variable para guardar la posicion
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int searchName(char* name, char parray[][20], int len, int* pIndex)
 {
     int i;
@@ -293,7 +381,12 @@ int searchName(char* name, char parray[][20], int len, int* pIndex)
     }
     return ret;
 }
-
+/** \brief Ordena array de mayor a menor
+* \param array de char
+* \param tamaño del array
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error
+*/
 int ordenarArrayMayorMenor(char* pArray, int len,int limit)
 {
     int i;
@@ -313,7 +406,11 @@ int ordenarArrayMayorMenor(char* pArray, int len,int limit)
     }
     return 0;
 }
-
+/** \brief Muestra un array de int
+* \param array de int
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error
+*/
 int showArrayInt(int* pArray,int len)
 
 {
@@ -324,7 +421,11 @@ int showArrayInt(int* pArray,int len)
     }
     return 0;
 }
-
+/** \brief Muestra array de char
+* \param array de char
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error
+*/
 int showArrayChar(char* pArray,int len)
 
 {
@@ -335,7 +436,10 @@ int showArrayChar(char* pArray,int len)
     }
     return 0;
 }
-
+/** \brief Valida numeros enteros
+* \param array de char
+* \return retorna 1 diciendo que no hay error
+*/
 int isNumberInt (char* pStr)
 {
     int i=0;
@@ -349,7 +453,10 @@ int isNumberInt (char* pStr)
     }
     return 1;
 }
-
+/** \brief Valida numeros flotantes
+* \param array de char
+* \return retorna 1 diciendo que no hay error
+*/
 int isNumberFloat (char* pStr)
 {
     int i=0;
@@ -373,7 +480,10 @@ int isNumberFloat (char* pStr)
     }
     return 1;
 }
-
+/** \brief Valida letras minusculas y mayusculas
+* \param array de char
+* \return retorna 1 diciendo que no hay error
+*/
 int isLetter (char* pStr)
 {
     int i=0;
@@ -387,7 +497,10 @@ int isLetter (char* pStr)
     }
     return 1;
 }
-
+/** \brief Valida caracteres alfanumericos
+* \param array de char
+* \return retorna 1 diciendo que no hay error
+*/
 int isAlphanumeric (char* pStr)
 {
     int i=0;
@@ -402,7 +515,10 @@ int isAlphanumeric (char* pStr)
     }
     return 1;
 }
-
+/** \brief Valida telefono
+* \param array de char
+* \return retorna 1 diciendo que no hay error
+*/
 int isTelephone (char* pStr)
 {
     int i=0;
@@ -425,7 +541,10 @@ int isTelephone (char* pStr)
         }
     return 0;
 }
-
+/** \brief Valida dni
+* \param array de char
+* \return retorna 1 diciendo que no hay error
+*/
 int isDni (char* pStr)
 {
     int i=0;
@@ -443,7 +562,10 @@ int isDni (char* pStr)
     }
     return 1;
 }
-
+/** \brief Valida cuit/cuil
+* \param array de char
+* \return retorna 1 diciendo que no hay error
+*/
 int isCuit (char* pStr)
 {
     int ret=0;

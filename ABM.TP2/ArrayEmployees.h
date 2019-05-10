@@ -21,7 +21,7 @@ int emp_removeEmployee(Employee* pEmployees, int len,char* msgE,int tries);
 
 int emp_printEmployees(Employee* pEmployees,int len);
 
-int emp_sortEmployeeSurnameSector(Employee* pEmployees,int len);
+int emp_sortEmployeeSurnameSector(Employee* pEmployees,int len,int order);
 
 int emp_printTotalPromAboveSalary(Employee* pEmployees, int len);
 

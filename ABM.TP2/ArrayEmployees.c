@@ -5,7 +5,16 @@
 #include "ArrayEmployees.h"
 
 static int generateID(void);
-
+/** \brief Proporciona un menú a modo de función main que realiza
+* las tareas de alta, baja, modificacion e informes del ABM
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \param textMenu pasa por parámetro todo lo que tendra el texto del menu
+* \param msgE mensajes de error de las funciones
+* \param escape delimita el numero maximo con el cual saldra de la iteracion y el final del menu
+* \param tries reintentos a la hora de volver a cargar algo
+* \return retorna 0 diciendo que no hay error
+*/
 int emp_menu(Employee* pEmployees,int len,char* textMenu,char* msgE,int escape,int tries)
 {
 
@@ -83,17 +92,14 @@ int emp_menu(Employee* pEmployees,int len,char* textMenu,char* msgE,int escape,i
                     {
                         if(flag == 1)
                         {
-                            if(emp_sortEmployeeSurnameSector(pEmployees,len) == 0);
-                            {
-                                emp_printEmployees(pEmployees,len);
-                            }
-                            if(emp_printTotalPromAboveSalary(pEmployees,len) == 0)
-                            {
-                                emp_printTotalPromAboveSalary(pEmployees,len);
-                            }
-
+                            emp_sortEmployeeSurnameSector(pEmployees,len,1);
+                            emp_printEmployees(pEmployees,len);
+                            emp_printTotalPromAboveSalary(pEmployees,len);
                         }
-                        printf("\n~~~~No hay registros para mostrar~~~~\n");
+                        else
+                        {
+                            printf("\n~~~~No hay registros para mostrar~~~~\n");
+                        }
                         break;
                     }
                 case 5:
@@ -106,7 +112,12 @@ int emp_menu(Employee* pEmployees,int len,char* textMenu,char* msgE,int escape,i
 
     return 0;
 }
-
+/** \brief Indica que todas las posiciones del array están
+* vacías al colocar el isEmpty como 1
+* \param lista puntero de Empleado al array de empleados
+* \param len del array
+* \return retorna 0 diciendo que no hay error
+*/
 int emp_initArray(Employee* pEmployees, int len)
 {
     int i;
@@ -120,11 +131,16 @@ int emp_initArray(Employee* pEmployees, int len)
     }
     return 0;
 }
-
+/** \brief Realiza la funcion de carga de empleados dentro
+* del array
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \param msgE mensajes de error de las funciones
+* \param tries reintentos a la hora de volver a cargar algo
+* \return retorna 0 diciendo que no hay error o -1 si encuentra un error
+*/
 int emp_addEmployee(Employee* pEmployees,int len, char* msgE,int tries)
 {
-    int auxiliarIDEmployee;
-    int posOfID;
     int indexFree;
     char bufferName[51];
     char bufferSurname[51];
@@ -136,11 +152,9 @@ int emp_addEmployee(Employee* pEmployees,int len, char* msgE,int tries)
 
     if(pEmployees != NULL && len > 0) ///SIEMPRE VALIDAR AL USAR ARRAYS
     {
-        auxiliarIDEmployee = emp_getID(pEmployees,len,msgE,tries);
         indexFree = emp_searchFreeSpace(pEmployees,len);
-        posOfID = emp_findPosID(pEmployees,len,auxiliarIDEmployee);
 
-        if((auxiliarIDEmployee >= 1) && (posOfID != -1))
+        if(indexFree >= 0)
         {
             if((getStringLetras(bufferName,"Ingrese nombre: ",msgE,tries) == 0) &&
             (getStringLetras(bufferSurname,"Ingrese apellido: ",msgE,tries) == 0))
@@ -170,7 +184,11 @@ int emp_addEmployee(Employee* pEmployees,int len, char* msgE,int tries)
 
     return ret;
 }
-
+/** \brief Busca el espacio en el array donde haya espacio (-1)
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \return retorna la posicion o -1 si encuentra un error
+*/
 int emp_searchFreeSpace(Employee* pEmployees, int len)
 {
     int i;
@@ -189,7 +207,12 @@ int emp_searchFreeSpace(Employee* pEmployees, int len)
     }
     return ret;
 }
-
+/** \brief Busca la posicion de un ID comparandolo con otro
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \param idEmp usa para comparar un id con otro
+* \return retorna la posicion o -1 si encuentra un error
+*/
 int emp_findPosID(Employee* pEmployees, int len,int idEmp)
 {
     int i;
@@ -208,7 +231,13 @@ int emp_findPosID(Employee* pEmployees, int len,int idEmp)
     }
     return ret;
 }
-
+/** \brief Realiza la baja lógica de algún empleado dentro de la nómina
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \param msgE mensajes de errores
+* \param tries reintentos de la función
+* \return retorna 0 diciendo que no hay error
+*/
 int emp_removeEmployee(Employee* pEmployees, int len,char* msgE,int tries)
 {
     int auxiliarID;
@@ -235,14 +264,20 @@ int emp_removeEmployee(Employee* pEmployees, int len,char* msgE,int tries)
     }
     return ret;
 }
-
-int emp_getID(Employee * pPublicidad, int len, char* msgE, int tries)
+/** \brief Le deja ingresar al usuario un ID
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \param msgE mensajes de errores
+* \param tries reintentos de la función
+* \return retorna el ID que el usuario ingresa o -1 si hay un error
+*/
+int emp_getID(Employee * pEmployees, int len, char* msgE, int tries)
 {
     char bufferID[20];
     int auxiliarID;
     int ret = -1;
 
-    if(pPublicidad != NULL && len > 0)
+    if(pEmployees != NULL && len > 0)
     {
         if(getStringNumerosInt(bufferID,"\nIngrese ID: ",msgE,tries) == 0)
         {
@@ -252,7 +287,11 @@ int emp_getID(Employee * pPublicidad, int len, char* msgE, int tries)
     }
     return ret;
 }
-
+/** \brief Permite imprimir el array completo de Empleado
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int emp_printEmployees(Employee* pEmployees,int len)
 {
     int i;
@@ -264,7 +303,7 @@ int emp_printEmployees(Employee* pEmployees,int len)
         {
             if(pEmployees[i].isEmpty == 0)
             {
-                printf("ID Empleado: %d\nNombre: %s\nApellido: %s\n"
+                printf("\nID Empleado: %d\nNombre: %s\nApellido: %s\n"
                 "Sector: %d\nSalario: %.2f\n--------"
                 ,pEmployees[i].idEmployee,pEmployees[i].name,
                 pEmployees[i].surname,pEmployees[i].sector,pEmployees[i].salary);
@@ -278,12 +317,18 @@ int emp_printEmployees(Employee* pEmployees,int len)
     }
     return 0;
 }
-
-int emp_sortEmployeeSurnameSector(Employee* pEmployees,int len)
+/** \brief Permite ordenar el array por apellido y, en caso
+* de igualdad, los ordena por sector
+* \param lista puntero de Empleado al array de empleados
+* \param len del array
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
+int emp_sortEmployeeSurnameSector(Employee* pEmployees,int len,int order)
 {
     int i;
     int j;
     Employee buffer;
+    int ret = -1;
 
     if(pEmployees != NULL && len > 0)
     {
@@ -291,18 +336,41 @@ int emp_sortEmployeeSurnameSector(Employee* pEmployees,int len)
         {
             for(j=i+1;j<len;j++)
             {
-                if((pEmployees[i].surname > pEmployees[j].surname) &&(pEmployees[i].sector > pEmployees[j].sector))
+                if(order == 1 && (strcmp(pEmployees[j].surname,pEmployees[i].surname) < 0))
                 {
                     buffer = pEmployees[i];
                     pEmployees[i] = pEmployees[j];
                     pEmployees[j] = buffer;
+                    ret = 0;
+                }
+                else if(order == 0 && (strcmp(pEmployees[j].surname,pEmployees[i].surname) > 0))
+                {
+                    buffer = pEmployees[i];
+                    pEmployees[i] = pEmployees[j];
+                    pEmployees[j] = buffer;
+                    ret = 0;
+                }
+                else if(strcmp(pEmployees[j].surname,pEmployees[i].surname) == 0)
+                {
+                    if(pEmployees[i].sector > pEmployees[j].sector)
+                    {
+                        buffer = pEmployees[i];
+                        pEmployees[i] = pEmployees[j];
+                        pEmployees[j] = buffer;
+                        ret = 0;
+                    }
                 }
             }
         }
     }
-    return 0;
+    return ret;
 }
-
+/** \brief Imprime el total de los salarios su promedio y
+* la cantidad de empleados cuyos salarios superar el promedio
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error
+*/
 int emp_printTotalPromAboveSalary(Employee* pEmployees, int len)
 {
     int i;
@@ -318,20 +386,26 @@ int emp_printTotalPromAboveSalary(Employee* pEmployees, int len)
             if(pEmployees[i].isEmpty == 0)
             {
             acumuladorTotal += pEmployees[i].salary;
-            contador += pEmployees[i].salary;
+            contador++;
             }
         }
         prom = acumuladorTotal/contador;
 
         auxiliarAboveSalary = emp_aboveSalary(pEmployees,len,prom);
 
-        printf("El salario total es: %.2f\n",acumuladorTotal);
+        printf("\nEl salario total es: %.2f\n",acumuladorTotal);
         printf("El promedio es: %.2f\n",prom);
         printf("La cantidad de empleados con salario por encima del promedio es: %d",auxiliarAboveSalary);
     }
     return 0;
 }
-
+/** \brief Funcion auxiliar de la anterior para determinar la cantidad
+* de empleados cuyos salarios son mayores al promedio
+* \param lista puntero de Empleado al array de empleados
+* \param len del array
+* \param prom recibe el promedio por parametro
+* \return retorna la cantidad de empleados
+*/
 int emp_aboveSalary(Employee* pEmployees, int len, float prom)
 {
     int contador = 0;
@@ -352,7 +426,14 @@ int emp_aboveSalary(Employee* pEmployees, int len, float prom)
     }
     return ret;
 }
-
+/** \brief Permite modificar la lista de Empleados
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \param msgE mensajes de errores
+* \param escape delimita el numero maximo con el cual saldra de la iteracion y el final del menu
+* \param tries reintentos de la función
+* \return retorna 0 diciendo que no hay error
+*/
 int emp_modifyEmployee(Employee* pEmployees,int len,char* msgE,int escape,int tries)
 {
     char bufferName[51];
@@ -436,7 +517,9 @@ int emp_modifyEmployee(Employee* pEmployees,int len,char* msgE,int escape,int tr
     }
     return ret;
 }
-
+/** \brief Genera un ID de Empleado
+* \return retorna el ID generado y lo incrementa cada vez que se usa
+*/
 static int generateID(void)
 {
     static int idEmp = 0;
