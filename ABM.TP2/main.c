@@ -3,7 +3,7 @@
 #include "ArrayEmployees.h"
 #include "arraynuevo.h"
 
-#define LEN 5
+#define LEN 1000
 #define TRIES 3
 
 int main()
